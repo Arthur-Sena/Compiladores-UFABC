@@ -1,0 +1,7 @@
+programa
+
+  numero c;
+
+  c = 2 * 3 + 4;
+  escreva (c);
+fimprog;
