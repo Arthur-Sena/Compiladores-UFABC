@@ -6,7 +6,7 @@ programa
   b = 1.7;
   c = 1;
 
-  se (a<b)
+  caso (a < b)
   {
   	c = a + 1;
   }senao

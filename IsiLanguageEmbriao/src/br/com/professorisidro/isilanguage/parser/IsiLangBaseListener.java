@@ -1,4 +1,4 @@
-// Generated from IsiLang.g4 by ANTLR 4.7.1
+// Generated from IsiLang.g4 by ANTLR 4.7.2
 package br.com.professorisidro.isilanguage.parser;
 
 	import br.com.professorisidro.isilanguage.datastructures.IsiSymbol;

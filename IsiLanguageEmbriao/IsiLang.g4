@@ -32,6 +32,8 @@ grammar IsiLang;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
 
+    private ArrayList<Integer> _exprTypes = new ArrayList<Integer>();
+
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
 			throw new IsiSemanticException("Symbol "+id+" not declared");
@@ -138,13 +140,29 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                expr
                SC
                {
+                 boolean hasNumber = false;
+                 boolean hasText = false;
+                 for (int type : _exprTypes) {
+                     if (type == IsiVariable.NUMBER) hasNumber = true;
+                     if (type == IsiVariable.TEXT) hasText = true;
+                 }
+                 if (hasNumber && hasText) {
+                     throw new IsiSemanticException("ERRO: Expressao com tipos incompativeis. Nao pode misturar numero e texto.");
+                 }
+
+                 IsiVariable leftVar = (IsiVariable)symbolTable.get(_exprID);
+                 int resultType = hasText ? IsiVariable.TEXT : IsiVariable.NUMBER;
+                 if(leftVar.getType() != resultType){
+                    throw new IsiSemanticException("ERRO: Tipos incompativeis na atribuicao para a variavel '"+_exprID+"'.");
+                 }
+
                	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
                	 stack.peek().add(cmd);
                }
 			;
 
 
-cmdselecao  :  'se' AP
+cmdselecao  :  'caso' AP
                     ID    { _exprDecision = _input.LT(-1).getText(); }
                     OPREL { _exprDecision += _input.LT(-1).getText(); }
                     (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
@@ -183,11 +201,15 @@ expr		:  termo (
 
 termo		: ID { verificaID(_input.LT(-1).getText());
 	               _exprContent += _input.LT(-1).getText();
+
+                IsiVariable var = (IsiVariable)symbolTable.get(_input.LT(-1).getText());
+                _exprTypes.add(var.getType());
                  }
             |
               NUMBER
               {
               	_exprContent += _input.LT(-1).getText();
+                _exprTypes.add(IsiVariable.NUMBER);
               }
 			;
 
