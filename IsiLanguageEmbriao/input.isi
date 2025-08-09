@@ -1,7 +1,18 @@
 programa
 
-  numero c;
+  numero a, b, c, d;
 
-  c = 2 * 3 + 4;
+  a = 2.2;
+  b = 1.7;
+  c = 1;
+
+  se (a<b)
+  {
+  	c = a + 1;
+  }senao
+  {
+  	c = a - 1;
+  }
+
   escreva (c);
 fimprog;

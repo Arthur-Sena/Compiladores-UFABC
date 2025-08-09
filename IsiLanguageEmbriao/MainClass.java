@@ -5,9 +5,13 @@ public class MainClass{
 double  a;
 double  b;
 double  c;
-String  t1;
-a= _key.nextDouble();
-b= _key.nextDouble();
-c = a*b;
+double  d;
+a = 2.2;
+b = 1.7;
+c = 1;
+if (a<b) {
+c = a+1;}else {
+c = a-1;}
+
 System.out.println(c);
   }}

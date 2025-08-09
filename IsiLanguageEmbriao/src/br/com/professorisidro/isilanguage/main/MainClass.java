@@ -21,16 +21,6 @@ public class MainClass {
 			IsiLangLexer lexer;
 			IsiLangParser parser;
 
-			// 1. Lê todo o conteúdo do arquivo input.isi para uma string
-			String filePath = "input.isi";
-			String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-
-			// 2. Imprime o conteúdo do arquivo no terminal
-			System.out.println("---- Código Fonte (input.isi) ----");
-			System.out.println(fileContent);
-			System.out.println("------------------------------------");
-			System.out.println();
-
 			// leio o arquivo "input.isi" e isso é entrada para o Analisador Lexico
 			lexer = new IsiLangLexer(CharStreams.fromFileName("input.isi"));
 			
@@ -42,12 +32,20 @@ public class MainClass {
 			
 			parser.prog();
 			
-			System.out.println("Compilation Successful");
-			
 			//parser.exibeComandos();
 			
-			//parser.generateCode();
-			
+			parser.generateCode();
+
+			// 1. Lê todo o conteúdo do arquivo input.isi para uma string
+			String filePath = "input.isi";
+			String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+
+			// 2. Imprime o conteúdo do arquivo no terminal
+			System.out.println("---- Código Fonte (input.isi) ----");
+			System.out.println(fileContent);
+			System.out.println("------------------------------------");
+			System.out.println("Compilado com sucesso");
+			System.out.println();
 		}
 		catch(IsiSemanticException ex) {
 			System.err.println("Semantic error - "+ex.getMessage());
