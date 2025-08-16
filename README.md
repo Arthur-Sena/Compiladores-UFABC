@@ -60,13 +60,11 @@ programa
 
   leia(a);
   leia(b);
-fimprog.
+fimprog;
 ```
 Item 2 - Possuir comando de leitura e impressão
 ```bash
 programa
-  numero a, b;
-
   numero a, b;
 
   leia(a);
@@ -118,7 +116,7 @@ programa
   escreva (resultado);
 fimprog;
 
-Semantic error - ERRO: Expressao com tipos incompativeis. Nao pode misturar numero e texto.
+Semantic error - (Line 9) ERRO: Expressao com tipos incompativeis. Nao pode misturar numero e texto.
 ````
 
 Item 6 - Deve ter estrutura condicional.
@@ -144,17 +142,17 @@ fimprog;
 
 ## Gramática
 
-ID	: [a-z] ([a-z] | [A-Z] | [0-9])*;
-NUMBER	: [0-9]+ ('.' [0-9]+)?;
-OP	: '+' | '-' | '*' | '/';
-ATTR : '=';
-OPREL : '>' | '<' | '>=' | '<=' | '==' | '!=';
-AP	: '(';
-FP	: ')';
-SC	: ';';
-VIR  : ',';
-ACH  : '{';
-FCH  : '}';
-WS	: (' ' | '\t' | '\n' | '\r') -> skip;
+- ID	: [a-z] ([a-z] | [A-Z] | [0-9])*;
+- NUMBER	: [0-9]+ ('.' [0-9]+)?;
+- OP	: '+' | '-' | '*' | '/';
+- ATTR : '=';
+- OPREL : '>' | '<' | '>=' | '<=' | '==' | '!=';
+- AP	: '(';
+- FP	: ')';
+- SC	: ';';
+- VIR  : ',';
+- ACH  : '{';
+- FCH  : '}';
+- WS	: (' ' | '\t' | '\n' | '\r') -> skip;
 
 ### ▶️ Link do vídeo no Youtube: [Link]()
