@@ -118,7 +118,7 @@ programa
   escreva (resultado);
 fimprog;
 
-Semantic error - ERRO: Expressao com tipos incompativeis. Nao pode misturar numero e texto.
+Semantic error - (Line 9) ERRO: Expressao com tipos incompativeis. Nao pode misturar numero e texto.
 ````
 
 Item 6 - Deve ter estrutura condicional.
