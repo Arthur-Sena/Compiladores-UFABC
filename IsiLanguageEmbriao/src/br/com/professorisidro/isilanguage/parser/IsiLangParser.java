@@ -644,12 +644,13 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class CmdattribContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
+		public Token id;
 		public TerminalNode ATTR() { return getToken(IsiLangParser.ATTR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public TerminalNode SC() { return getToken(IsiLangParser.SC, 0); }
+		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
 		public CmdattribContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -671,10 +672,10 @@ public class IsiLangParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(82);
-			match(ID);
-			 verificaID(_input.LT(-1).getText());
-			                    _exprID = _input.LT(-1).getText();
-			                   
+			((CmdattribContext)_localctx).id = match(ID);
+			 verificaID((((CmdattribContext)_localctx).id!=null?((CmdattribContext)_localctx).id.getText():null));
+			                       _exprID = (((CmdattribContext)_localctx).id!=null?((CmdattribContext)_localctx).id.getText():null);
+			                     
 			setState(84);
 			match(ATTR);
 			 _exprContent = ""; 
@@ -690,13 +691,13 @@ public class IsiLangParser extends Parser {
 			                     if (type == IsiVariable.TEXT) hasText = true;
 			                 }
 			                 if (hasNumber && hasText) {
-			                     throw new IsiSemanticException("ERRO: Expressao com tipos incompativeis. Nao pode misturar numero e texto.");
+			                     throw new IsiSemanticException("(Line "+((CmdattribContext)_localctx).id.getLine()+") ERRO: Expressao com tipos incompativeis. Nao pode misturar numero e texto.");
 			                 }
 
 			                 IsiVariable leftVar = (IsiVariable)symbolTable.get(_exprID);
 			                 int resultType = hasText ? IsiVariable.TEXT : IsiVariable.NUMBER;
 			                 if(leftVar.getType() != resultType){
-			                    throw new IsiSemanticException("ERRO: Tipos incompativeis na atribuicao para a variavel '"+_exprID+"'.");
+			                    throw new IsiSemanticException("(Line "+((CmdattribContext)_localctx).id.getLine()+") ERRO: Tipos incompativeis na atribuicao para a variavel '"+_exprID+"'.");
 			                 }
 
 			               	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);

@@ -1,18 +1,12 @@
 programa
 
-  numero a, b, c, d;
+  numero a, resultado;
+  texto  t1;
 
-  a = 2.2;
-  b = 1.7;
-  c = 1;
+  leia(a);
+  leia(t1);
 
-  caso (a < b)
-  {
-  	c = a + 1;
-  }senao
-  {
-  	c = a - 1;
-  }
+  resultado = a + t1;
 
-  escreva (c);
+  escreva (resultado);
 fimprog;

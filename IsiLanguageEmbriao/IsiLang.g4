@@ -133,9 +133,9 @@ cmdescrita	: 'escreva'
                }
 			;
 
-cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
-                    _exprID = _input.LT(-1).getText();
-                   }
+cmdattrib	:  id=ID { verificaID($id.text);
+                       _exprID = $id.text;
+                     }
                ATTR { _exprContent = ""; }
                expr
                SC
@@ -147,13 +147,13 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                      if (type == IsiVariable.TEXT) hasText = true;
                  }
                  if (hasNumber && hasText) {
-                     throw new IsiSemanticException("ERRO: Expressao com tipos incompativeis. Nao pode misturar numero e texto.");
+                     throw new IsiSemanticException("(Line "+$id.getLine()+") ERRO: Expressao com tipos incompativeis. Nao pode misturar numero e texto.");
                  }
 
                  IsiVariable leftVar = (IsiVariable)symbolTable.get(_exprID);
                  int resultType = hasText ? IsiVariable.TEXT : IsiVariable.NUMBER;
                  if(leftVar.getType() != resultType){
-                    throw new IsiSemanticException("ERRO: Tipos incompativeis na atribuicao para a variavel '"+_exprID+"'.");
+                    throw new IsiSemanticException("(Line "+$id.getLine()+") ERRO: Tipos incompativeis na atribuicao para a variavel '"+_exprID+"'.");
                  }
 
                	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
@@ -205,47 +205,22 @@ termo		: ID { verificaID(_input.LT(-1).getText());
                 IsiVariable var = (IsiVariable)symbolTable.get(_input.LT(-1).getText());
                 _exprTypes.add(var.getType());
                  }
-            |
-              NUMBER
+            | NUMBER
               {
               	_exprContent += _input.LT(-1).getText();
                 _exprTypes.add(IsiVariable.NUMBER);
               }
 			;
 
-
-AP	: '('
-	;
-
-FP	: ')'
-	;
-
-SC	: ';'
-	;
-
-OP	: '+' | '-' | '*' | '/'
-	;
-
-ATTR : '='
-	 ;
-
-VIR  : ','
-     ;
-
-ACH  : '{'
-     ;
-
-FCH  : '}'
-     ;
-
-
-OPREL : '>' | '<' | '>=' | '<=' | '==' | '!='
-      ;
-
-ID	: [a-z] ([a-z] | [A-Z] | [0-9])*
-	;
-
-NUMBER	: [0-9]+ ('.' [0-9]+)?
-		;
-
+AP	: '(';
+FP	: ')';
+SC	: ';';
+OP	: '+' | '-' | '*' | '/';
+ATTR : '=';
+VIR  : ',';
+ACH  : '{';
+FCH  : '}';
+OPREL : '>' | '<' | '>=' | '<=' | '==' | '!=';
+ID	: [a-z] ([a-z] | [A-Z] | [0-9])*;
+NUMBER	: [0-9]+ ('.' [0-9]+)?;
 WS	: (' ' | '\t' | '\n' | '\r') -> skip;
