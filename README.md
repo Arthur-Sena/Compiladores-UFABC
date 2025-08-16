@@ -67,8 +67,6 @@ Item 2 - Possuir comando de leitura e impressão
 programa
   numero a, b;
 
-  numero a, b;
-
   leia(a);
   leia(b);
 
