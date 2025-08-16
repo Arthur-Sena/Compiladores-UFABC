@@ -60,7 +60,7 @@ programa
 
   leia(a);
   leia(b);
-fimprog.
+fimprog;
 ```
 Item 2 - Possuir comando de leitura e impressão
 ```bash
