@@ -46,7 +46,7 @@ java MainClass
 
 Seu código .isi será exibido no console e um arquivo **MainClass.java** será gerado com seu código em java.
 
-⚠️ Caso precise editar a gramática para algum tipo de teste, digite esse comando no terminal para atualizar as regras.
+⚠️ Caso precise editar a gramática para algum tipo de teste, digite esse comando no terminal para atualizar as regras no arquivo IsiLang.g4.
 
 ```bash
 java -jar antlr-4.7.2-complete.jar -o src/br/com/professorisidro/isilanguage/parser -package br.com.professorisidro.isilanguage.parser IsiLang.g4
